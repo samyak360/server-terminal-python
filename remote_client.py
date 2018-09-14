@@ -7,10 +7,6 @@ s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 # defining ip and port below 
 ip="192.168.1.37"
 port=7890
-port2=7892
-
-#  binind ip and port with bind function that takes input as tuple
-s.bind(("",port2))
 
 # defining list for 10 commands counter
 timer=[]
@@ -30,7 +26,10 @@ while  True :
 		server_data=s.recvfrom(100)
                 #   only  server  data is stored and printed
 	        recv_cmd=server_data[0]
-		print recv_cmd
+		if "sh: 1" in recv_cmd :
+			print "\ncommand not found..\nmake sure you are connected to LINUX server\n"
+		else:
+			print "\n",recv_cmd,"\n"
 
 s.close()
 
