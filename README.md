@@ -15,7 +15,7 @@ but for that, server will first authenticate client before giving access.
 
 **linux-client**  
 
-![linux terminal](linuxterm.jpg)  
+![linux terminal](linuxterm.png)  
 
 ### **server**(remote_server.py)
 
