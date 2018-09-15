@@ -1,36 +1,43 @@
 #!/usr/bin/env python2
 
-import  socket,commands
+import  socket,commands,subprocess
 #  we are looking for UDP (user datagram protocol )
 #              ip_version4,         UDP 
 s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 # defining ip and port below 
 ip="192.168.1.37"
 port=7890
-
-# defining list for 10 commands counter
-timer=[]
-while  True :
-#  sending  data to  target machine 
-	cmd=raw_input("samyak@sam:~$ ")
-	s.sendto(cmd,(ip,port))
-	if  'exit' in  cmd  or  'close' in cmd:
-		print "closing server.."
-		exit()
-	else :
-		timer.append(cmd)
-		if  len(timer) > 5 :
-			print commands.getoutput('clear')
-			for i in  range(len(timer)):
-				timer.pop()
-		server_data=s.recvfrom(100)
-                #   only  server  data is stored and printed
-	        recv_cmd=server_data[0]
-		if "sh: 1" in recv_cmd :
-			print "\ncommand not found..\nmake sure you are connected to LINUX server\n"
-		else:
-			print "\n",recv_cmd,"\n"
-
+#authentication from server
+user = raw_input("enter your username: ")
+password = raw_input("enter your password: ")
+s.sendto(user,(ip,port))
+s.sendto(password,(ip,port))
+msg = s.recvfrom(40)
+if msg[0] == 'ok' :
+        # defining list for 10 commands counter
+        timer=[]
+        while  True :
+        #  sending  data to  target machine 
+                cmd=raw_input("samyak@sam:~$ ")
+                s.sendto(cmd,(ip,port))
+                if  'exit' in  cmd  or  'close' in cmd:
+                        print "closing server.."
+                        exit()
+                else :
+                        timer.append(cmd)
+                        if  len(timer) > 5 :
+                                print commands.getoutput('clear')
+                                for i in  range(len(timer)):
+                                        timer.pop()
+                        server_data=s.recvfrom(100)
+                        #   only  server  data is stored and printed
+                        recv_cmd=server_data[0]
+                        if "sh: 1" in recv_cmd :
+                                print "\ncommand not found..\nmake sure you are connected to LINUX server\n"
+                        else:
+                                print "\n",recv_cmd,"\n"
+else:
+        print "\n",msg[0]
 s.close()
 
 
