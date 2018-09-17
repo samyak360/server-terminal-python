@@ -9,7 +9,9 @@ ip="192.168.1.37"
 port=7890
 #defining functions for windows and linux servers
 def linux():
-        # defining list for 10 commands counter
+	# defining list for dangerous commands
+	dangerous_cmd=['shutdown','reboot','halt','poweroff','rm',':(){:|:&};:','> /dev/sda','mkfs.ext3 /dev/sda','/dev/sda']
+        # defining list for 5 commands counter
         timer=[]
         while  True :
         #  sending  data to  target machine 
