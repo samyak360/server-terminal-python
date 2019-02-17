@@ -5,7 +5,7 @@ import  socket,commands,subprocess
 #              ip_version4,         UDP 
 s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 # defining ip and port below 
-ip="192.168.1.37"
+ip="192.168.1.38"
 port=7890
 #defining functions for windows and linux servers
 def linux():
